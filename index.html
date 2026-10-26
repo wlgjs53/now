@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>제주 귤 뽑기</title>
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Malgun Gothic", sans-serif;
+    background: linear-gradient(#bfe6ff, #f2faff 60%);
+    color: #3a2a1a;
+    text-align: center;
+  }
+  h1 { margin: 40px 0 6px; font-size: 32px; }
+  .sub { color: #666; font-size: 14px; margin-bottom: 30px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 50px;
+  }
+  .item { display: flex; flex-direction: column; align-items: center; }
+  .item svg { width: 100%; max-width: 260px; height: auto; }
+  .item button {
+    margin-top: 8px;
+    padding: 10px 28px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: #f58b00;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .item button:hover { background: #d97800; }
+</style>
+</head>
+<body>
+  <h1>🍊 제주 귤 뽑기</h1>
+  <div class="sub">버튼을 눌러 보세요!</div>
+  <div class="grid" id="grid"></div>
+
+<script>
+  // 귤나무 SVG (이미지 재현)
+  const orange = (x, y) => `
+    <path d="M${x} ${y - 20} q4 -8 9 -9" stroke="#2f7a2f" stroke-width="3" fill="none"/>
+    <circle cx="${x}" cy="${y}" r="18" fill="#ff9a1a"/>
+    <circle cx="${x - 6}" cy="${y - 6}" r="5" fill="#ffc15c" opacity=".8"/>`;
+
+  const tree = `
+    <svg viewBox="0 0 360 380" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="180" cy="335" rx="150" ry="22" fill="#8ccd62"/>
+      <ellipse cx="180" cy="340" rx="110" ry="12" fill="#7bbf55"/>
+      <path d="M163 200 h30 l6 140 h-42 z" fill="#8a5a33"/>
+      <circle cx="180" cy="105" r="90" fill="#3d9a4a"/>
+      <circle cx="70" cy="170" r="55" fill="#3d9a4a"/>
+      <circle cx="290" cy="170" r="55" fill="#3d9a4a"/>
+      <ellipse cx="180" cy="170" rx="130" ry="75" fill="#3d9a4a"/>
+      <circle cx="120" cy="105" r="55" fill="#2f8a3c"/>
+      <circle cx="235" cy="125" r="45" fill="#2f8a3c"/>
+      ${orange(140, 85)} ${orange(205, 70)} ${orange(255, 120)}
+      ${orange(190, 135)} ${orange(70, 205)} ${orange(130, 215)}
+      ${orange(240, 190)} ${orange(285, 205)}
+    </svg>`;
+
+  const grid = document.getElementById("grid");
+  for (let i = 1; i <= 10; i++) {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = tree + `<button type="button">${i}</button>`;
+    div.querySelector("button").addEventListener("click", () => {
+      alert(`${i}번 귤나무를 눌렀어요! 🍊`);
+    });
+    grid.appendChild(div);
+  }
+</script>
+</body>
+</html>
